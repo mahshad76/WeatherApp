@@ -55,6 +55,9 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.auth)
+    implementation(libs.androidx.navigation.compose)
+
+    implementation(project(":authentication"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
