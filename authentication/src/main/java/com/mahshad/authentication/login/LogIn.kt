@@ -1,15 +1,35 @@
 package com.mahshad.authentication.login
 
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.compose.composable
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class LogInRoute(
-    val email: String,
-    val password: String
-)
+data object LogInRoute
+
+fun NavGraphBuilder.loginNavGraph(
+    onNavigateToSignUp: () -> Unit,
+    onSuccessLogIn: () -> Unit
+) {
+    composable<LogInRoute> {
+        LoginScreen(
+//            onNavigateToSignUp = onNavigateToSignUp,
+//            onSuccessLogIn = onSuccessLogIn
+        )
+    }
+}
+
+
+
 
 @Composable
-fun LogIn(onNavigate: () -> Unit) {
+fun LoginScreen(
+    //o/nSuccess: () -> Unit
+) {
+    Text(
+        text = "Welcome to a styled text example!"
+    )
 
 }

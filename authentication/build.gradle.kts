@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    id("org.jetbrains.kotlin.plugin.compose") version "2.0.21"
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 android {
@@ -30,6 +32,12 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.10" // Check for the latest compatible version
+    }
 }
 
 dependencies {
@@ -41,6 +49,11 @@ dependencies {
 
     /// Navigation
     implementation(libs.androidx.navigation.compose)
+
+    /// Composables
+    implementation("androidx.compose.material3:material3:1.2.1")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.navigation.compose.rememberNavController
 import com.mahshad.weatherapp.ui.WeatherAppNavHost
 import com.mahshad.weatherapp.ui.theme.WeatherAppTheme
 
@@ -13,7 +14,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             WeatherAppTheme {
-                WeatherAppNavHost()
+                WeatherAppNavHost(navController = rememberNavController())
             }
         }
     }
