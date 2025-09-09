@@ -1,4 +1,4 @@
-package com.mahshad.authentication.login.components
+package com.mahshad.authentication.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
