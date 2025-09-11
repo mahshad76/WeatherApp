@@ -20,7 +20,7 @@ import com.mahshad.authentication.components.WhiteBackground
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object LogInRoute
+data class LogInRoute(val username: String = "", val password: String = "")
 
 @Composable
 fun LoginScreen(

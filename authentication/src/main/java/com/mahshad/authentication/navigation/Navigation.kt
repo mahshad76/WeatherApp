@@ -13,8 +13,10 @@ import kotlinx.serialization.Serializable
 @Serializable
 data object AuthRoute
 
-val NavController.onNavigateToLogIn: () -> Unit
-    get() = { this.navigate(LogInRoute) }
+val NavController.onNavigateToLogIn: (username: String, password: String) -> Unit
+    get() = { username, password ->
+        this.navigate(LogInRoute(username, password))
+    }
 
 val NavController.onNavigateToSignUp: () -> Unit
     get() = { this.navigate(SignUpRoute) }
@@ -24,7 +26,7 @@ val NavController.onSuccessLogIn: () -> Unit
 
 fun NavGraphBuilder.authNavGraph(
     onNavigateToSignUp: () -> Unit,
-    onNavigateToLogIn: () -> Unit,
+    onNavigateToLogIn: (String, String) -> Unit,
     onSuccessLogIn: () -> Unit
 ) {
     navigation<AuthRoute>(startDestination = LogInRoute::class) {
@@ -32,7 +34,7 @@ fun NavGraphBuilder.authNavGraph(
             LoginScreen(onNavigateToSignUp = onNavigateToSignUp)
         }
         composable<SignUpRoute> {
-            SignUpScreen(onNavigateToLogIn)
+            SignUpScreen(onNavigateToLogIn = onNavigateToLogIn)
         }
     }
 }

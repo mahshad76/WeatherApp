@@ -6,9 +6,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mahshad.authentication.components.BlueBackground
 import com.mahshad.authentication.components.Button
 import com.mahshad.authentication.components.PasswordTextField
@@ -20,7 +23,11 @@ import kotlinx.serialization.Serializable
 data object SignUpRoute
 
 @Composable
-fun SignUpScreen(onNavigateToLogIn: () -> Unit) {
+fun SignUpScreen(
+    signUpViewModel: SignUpViewModel = hiltViewModel(),
+    onNavigateToLogIn: (String, String) -> Unit
+) {
+    val uiStateValue by signUpViewModel.uiState.collectAsStateWithLifecycle()
     Text(
         text = "Create Account"
     )
@@ -36,15 +43,22 @@ fun SignUpScreen(onNavigateToLogIn: () -> Unit) {
             ) {
                 TextField(
                     uiStateValue.username,
-                    { logInViewModel.updateUsernameState(it) })
+                    { signUpViewModel.updateUsernameState(it) })
                 PasswordTextField(
                     uiStateValue.password,
                     uiStateValue.passwordIsVisible,
-                    { logInViewModel.updatePasswordState(it) },
-                    { logInViewModel.updatePasswordVisibilityState(it) }
+                    { signUpViewModel.updatePasswordState(it) },
+                    {
+                        signUpViewModel.updatePasswordVisibilityState(it)
+                    }
                 )
                 Button(
-                    onClick = {},
+                    onClick = {
+                        onNavigateToLogIn.invoke(
+                            uiStateValue.username,
+                            uiStateValue.password
+                        )
+                    },
                     name = "Sign Up",
                     buttonColor = Color(0xFF00B1D0),
                     contentColor = Color.White

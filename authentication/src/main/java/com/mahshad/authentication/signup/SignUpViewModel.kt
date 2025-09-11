@@ -1,7 +1,6 @@
 package com.mahshad.authentication.signup
 
 import androidx.lifecycle.ViewModel
-import com.mahshad.authentication.login.LoginState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,14 +15,14 @@ data class SignUpState(
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor() : ViewModel() {
-    private val _uiState: MutableStateFlow<LoginState> = MutableStateFlow(
-        LoginState(
+    private val _uiState: MutableStateFlow<SignUpState> = MutableStateFlow(
+        SignUpState(
             "",
             "",
             false
         )
     )
-    val uiState: StateFlow<LoginState> = _uiState
+    val uiState: StateFlow<SignUpState> = _uiState
 
     fun updateUsernameState(username: String) {
         _uiState.update { stateValue -> stateValue.copy(username = username) }
