@@ -29,7 +29,7 @@ fun NavGraphBuilder.authNavGraph(
 ) {
     navigation<AuthRoute>(startDestination = LogInRoute::class) {
         composable<LogInRoute> {
-            LoginScreen(onNavigateToSignUp)
+            LoginScreen(onNavigateToSignUp = onNavigateToSignUp)
         }
         composable<SignUpRoute> {
             SignUpScreen(onNavigateToLogIn)

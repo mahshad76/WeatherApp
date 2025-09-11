@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.google.services)
     id("org.jetbrains.kotlin.plugin.serialization") version "1.9.0"
+    alias(libs.plugins.dagger.hilt.android)
+    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
@@ -59,8 +61,11 @@ dependencies {
 
     /// Navigation
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
 
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+    ///hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
     implementation(project(":authentication"))
 

@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun WhiteBackground(form: () -> Unit) {
+fun WhiteBackground(form: @Composable () -> Unit) {
     Surface(
         modifier = Modifier
             .width(430.dp)
@@ -23,7 +23,7 @@ fun WhiteBackground(form: () -> Unit) {
             topEnd = 40.dp,
             bottomStart = 40.dp,
             bottomEnd = 40.dp
-        )
+        ),
     ) {
         form()
     }
