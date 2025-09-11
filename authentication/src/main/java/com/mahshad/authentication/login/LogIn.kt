@@ -29,7 +29,7 @@ fun LoginScreen(
 ) {
     val uiStateValue by logInViewModel.uiState.collectAsStateWithLifecycle()
     Text(
-        text = "Welcome to a styled text example!"
+        text = "Welcome"
     )
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -57,7 +57,7 @@ fun LoginScreen(
                     contentColor = Color.White
                 )
                 Button(
-                    onClick = {},
+                    onClick = { onNavigateToSignUp.invoke() },
                     name = "Sign Up",
                     buttonColor = Color(0xFFDFF7E2),
                     contentColor = Color.Black
