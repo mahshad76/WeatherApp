@@ -1,5 +1,6 @@
 package com.mahshad.authentication.login
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
@@ -14,11 +15,15 @@ data class LoginState(
 )
 
 @HiltViewModel
-class LoginViewModel @Inject constructor() : ViewModel() {
+class LoginViewModel @Inject constructor(
+    private val savedStateHandle: SavedStateHandle
+) : ViewModel() {
+    val username: String = savedStateHandle["username"] ?: ""
+    val password: String = savedStateHandle["password"] ?: ""
     private val _uiState: MutableStateFlow<LoginState> = MutableStateFlow(
         LoginState(
-            "",
-            "",
+            username,
+            password,
             false
         )
     )
