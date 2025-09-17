@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -28,14 +27,15 @@ fun SignUpScreen(
     onNavigateToLogIn: (String, String) -> Unit
 ) {
     val uiStateValue by signUpViewModel.uiState.collectAsStateWithLifecycle()
-    Text(
-        text = "Create Account"
-    )
+    if (uiStateValue.isSignUpSuccessful) {
+        onNavigateToLogIn(uiStateValue.username, uiStateValue.password)
+    }
+
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        BlueBackground()
+        BlueBackground("Create an account")
         WhiteBackground({
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -54,14 +54,15 @@ fun SignUpScreen(
                 )
                 Button(
                     onClick = {
-                        onNavigateToLogIn.invoke(
+                        signUpViewModel.signUp(
                             uiStateValue.username,
                             uiStateValue.password
                         )
                     },
                     name = "Sign Up",
                     buttonColor = Color(0xFF00B1D0),
-                    contentColor = Color.White
+                    contentColor = Color.White,
+                    enabled = uiStateValue.isSignUpButtonEnabled
                 )
             }
         })

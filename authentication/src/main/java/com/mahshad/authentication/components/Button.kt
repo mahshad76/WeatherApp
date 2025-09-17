@@ -16,7 +16,8 @@ fun Button(
     onClick: () -> Unit,
     name: String,
     buttonColor: Color,
-    contentColor: Color
+    contentColor: Color,
+    enabled: Boolean = false
 ) {
     Button(
         onClick,
@@ -27,7 +28,8 @@ fun Button(
         colors = ButtonDefaults.buttonColors(
             containerColor = buttonColor,
             contentColor = contentColor
-        )
+        ),
+        enabled = enabled
     ) {
         Text(name)
     }

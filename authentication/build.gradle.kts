@@ -64,6 +64,11 @@ dependencies {
     kapt(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 
+    /// Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.auth)
+
     implementation(libs.ui.tooling.preview)
 
     implementation(libs.androidx.material3.v121)

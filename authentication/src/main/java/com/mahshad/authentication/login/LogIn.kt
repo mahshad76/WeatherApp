@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -28,14 +27,12 @@ fun LoginScreen(
     onNavigateToSignUp: () -> Unit
 ) {
     val uiStateValue by logInViewModel.uiState.collectAsStateWithLifecycle()
-    Text(
-        text = "Welcome"
-    )
+
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        BlueBackground()
+        BlueBackground("Welcome")
         WhiteBackground({
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -48,7 +45,7 @@ fun LoginScreen(
                     uiStateValue.password,
                     uiStateValue.passwordIsVisible,
                     { logInViewModel.updatePasswordState(it) },
-                    { logInViewModel.updatePasswordVisibilityState(it) }
+                    { logInViewModel.updatePasswordVisibilityState() }
                 )
                 Button(
                     onClick = {},
@@ -60,7 +57,8 @@ fun LoginScreen(
                     onClick = { onNavigateToSignUp.invoke() },
                     name = "Sign Up",
                     buttonColor = Color(0xFFDFF7E2),
-                    contentColor = Color.Black
+                    contentColor = Color.Black,
+                    enabled = true
                 )
             }
         })
