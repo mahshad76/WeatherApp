@@ -58,12 +58,12 @@ fun LoginScreen(
                 )
                 Button(
                     onClick = {
-                        logInViewModel.onLoginClick()
+                        logInViewModel.onClick()
                     },
                     name = "Log In",
                     buttonColor = Color(0xFF00B1D0),
                     contentColor = Color.White,
-                    enabled = uiStateValue.activeLoginButton
+                    enabled = uiStateValue.activeButton
                 )
                 Button(
                     onClick = {

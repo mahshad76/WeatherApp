@@ -9,10 +9,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mahshad.authentication.design.BlueBackground
 import com.mahshad.authentication.design.Button
+import com.mahshad.authentication.design.TextField
 import com.mahshad.authentication.design.WhiteBackground
 import kotlinx.serialization.Serializable
 
@@ -25,9 +27,6 @@ fun SignUpScreen(
     onNavigateToLogIn: (String, String) -> Unit
 ) {
     val uiStateValue by signUpViewModel.uiState.collectAsStateWithLifecycle()
-    if (uiStateValue.isSignUpSuccessful) {
-        onNavigateToLogIn(uiStateValue.username, uiStateValue.password)
-    }
 
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -39,29 +38,38 @@ fun SignUpScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-//                TextField(
-//                    uiStateValue.username,
-//                    { signUpViewModel.updateUsernameState(it) },
-//                    )
-//                PasswordTextField(
-//                    uiStateValue.password,
-//                    uiStateValue.passwordIsVisible,
-//                    { signUpViewModel.updatePasswordState(it) },
-//                    {
-//                        signUpViewModel.updatePasswordVisibilityState(it)
-//                    }
-//                )
+                TextField(
+                    text = uiStateValue.username,
+                    update = {
+                        signUpViewModel.updateUsernameState(it)
+                    },
+                    placeholder = "example@example.com",
+                    keyboardType = KeyboardType.Email,
+                    matchPatternError = uiStateValue.usernamePatternError
+                )
+                TextField(
+                    text = uiStateValue.password,
+                    update = {
+                        signUpViewModel.updatePasswordState(it)
+                    },
+                    placeholder = "••••••••",
+                    keyboardType = KeyboardType.Password,
+                    matchPatternError = uiStateValue.passwordPatternError
+                )
                 Button(
                     onClick = {
-                        signUpViewModel.signUp(
-                            uiStateValue.username,
-                            uiStateValue.password
-                        )
+                        signUpViewModel.onClick()
+                        if (uiStateValue.successful) {
+                            signUpViewModel.signingUp()
+                            onNavigateToLogIn(uiStateValue.username, uiStateValue.password)
+                        } else {
+
+                        }
                     },
                     name = "Sign Up",
                     buttonColor = Color(0xFF00B1D0),
                     contentColor = Color.White,
-                    enabled = uiStateValue.isSignUpButtonEnabled
+                    enabled = uiStateValue.activeButton
                 )
             }
         })
