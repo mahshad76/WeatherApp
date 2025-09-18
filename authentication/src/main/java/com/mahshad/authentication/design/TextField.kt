@@ -1,4 +1,4 @@
-package com.mahshad.authentication.components
+package com.mahshad.authentication.design
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -16,20 +16,24 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TextField(
-    username: String,
-    updateUsername: (username: String) -> Unit,
+    text: String,
+    update: (text: String) -> Unit,
+    placeholder: String,
+    keyboardType: KeyboardType,
+    matchPatternError: Boolean
 ) {
     OutlinedTextField(
-        value = username,
-        onValueChange = { username: String ->
-            updateUsername.invoke(username)
+        value = text,
+        onValueChange = { text: String ->
+            update.invoke(text)
         },
         modifier = Modifier
             .width(357.dp)
             .wrapContentHeight()
             .padding(bottom = 30.dp),
         shape = RoundedCornerShape(18.dp),
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-        placeholder = { Text("example@example.com") }
+        keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
+        placeholder = { Text(placeholder) },
+        isError = matchPatternError
     )
 }

@@ -11,9 +11,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.mahshad.authentication.components.BlueBackground
-import com.mahshad.authentication.components.Button
-import com.mahshad.authentication.components.WhiteBackground
+import com.mahshad.authentication.design.BlueBackground
+import com.mahshad.authentication.design.Button
+import com.mahshad.authentication.design.WhiteBackground
 import kotlinx.serialization.Serializable
 
 @Serializable

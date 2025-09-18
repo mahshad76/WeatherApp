@@ -9,13 +9,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.mahshad.authentication.components.BlueBackground
-import com.mahshad.authentication.components.Button
-import com.mahshad.authentication.components.PasswordTextField
-import com.mahshad.authentication.components.TextField
-import com.mahshad.authentication.components.WhiteBackground
+import com.mahshad.authentication.design.BlueBackground
+import com.mahshad.authentication.design.Button
+import com.mahshad.authentication.design.TextField
+import com.mahshad.authentication.design.WhiteBackground
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -39,22 +39,36 @@ fun LoginScreen(
                 verticalArrangement = Arrangement.Center
             ) {
                 TextField(
-                    username = uiStateValue.username,
-                    updateUsername = { logInViewModel.updateUsernameState(it) }
+                    text = uiStateValue.username,
+                    update = {
+                        logInViewModel.updateUsernameState(it)
+                    },
+                    placeholder = "example@example.com",
+                    keyboardType = KeyboardType.Email,
+                    matchPatternError = uiStateValue.usernamePatternError
                 )
-                PasswordTextField(
-                    password = uiStateValue.password,
-                    updatePassword = { logInViewModel.updatePasswordState(it) }
+                TextField(
+                    text = uiStateValue.password,
+                    update = {
+                        logInViewModel.updatePasswordState(it)
+                    },
+                    placeholder = "••••••••",
+                    keyboardType = KeyboardType.Password,
+                    matchPatternError = uiStateValue.passwordPatternError
                 )
                 Button(
-                    onClick = {},
+                    onClick = {
+                        logInViewModel.onLoginClick()
+                    },
                     name = "Log In",
                     buttonColor = Color(0xFF00B1D0),
                     contentColor = Color.White,
                     enabled = uiStateValue.activeLoginButton
                 )
                 Button(
-                    onClick = { onNavigateToSignUp.invoke() },
+                    onClick = {
+                        onNavigateToSignUp.invoke()
+                    },
                     name = "Sign Up",
                     buttonColor = Color(0xFFDFF7E2),
                     contentColor = Color.Black,
