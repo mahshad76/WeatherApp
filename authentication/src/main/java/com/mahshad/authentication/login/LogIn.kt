@@ -39,19 +39,19 @@ fun LoginScreen(
                 verticalArrangement = Arrangement.Center
             ) {
                 TextField(
-                    uiStateValue.username,
-                    { logInViewModel.updateUsernameState(it) })
+                    username = uiStateValue.username,
+                    updateUsername = { logInViewModel.updateUsernameState(it) }
+                )
                 PasswordTextField(
-                    uiStateValue.password,
-                    uiStateValue.passwordIsVisible,
-                    { logInViewModel.updatePasswordState(it) },
-                    { logInViewModel.updatePasswordVisibilityState() }
+                    password = uiStateValue.password,
+                    updatePassword = { logInViewModel.updatePasswordState(it) }
                 )
                 Button(
                     onClick = {},
                     name = "Log In",
                     buttonColor = Color(0xFF00B1D0),
-                    contentColor = Color.White
+                    contentColor = Color.White,
+                    enabled = uiStateValue.activeLoginButton
                 )
                 Button(
                     onClick = { onNavigateToSignUp.invoke() },

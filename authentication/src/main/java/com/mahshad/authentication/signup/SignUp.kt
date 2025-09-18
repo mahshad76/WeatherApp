@@ -13,8 +13,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mahshad.authentication.components.BlueBackground
 import com.mahshad.authentication.components.Button
-import com.mahshad.authentication.components.PasswordTextField
-import com.mahshad.authentication.components.TextField
 import com.mahshad.authentication.components.WhiteBackground
 import kotlinx.serialization.Serializable
 
@@ -41,17 +39,18 @@ fun SignUpScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                TextField(
-                    uiStateValue.username,
-                    { signUpViewModel.updateUsernameState(it) })
-                PasswordTextField(
-                    uiStateValue.password,
-                    uiStateValue.passwordIsVisible,
-                    { signUpViewModel.updatePasswordState(it) },
-                    {
-                        signUpViewModel.updatePasswordVisibilityState(it)
-                    }
-                )
+//                TextField(
+//                    uiStateValue.username,
+//                    { signUpViewModel.updateUsernameState(it) },
+//                    )
+//                PasswordTextField(
+//                    uiStateValue.password,
+//                    uiStateValue.passwordIsVisible,
+//                    { signUpViewModel.updatePasswordState(it) },
+//                    {
+//                        signUpViewModel.updatePasswordVisibilityState(it)
+//                    }
+//                )
                 Button(
                     onClick = {
                         signUpViewModel.signUp(

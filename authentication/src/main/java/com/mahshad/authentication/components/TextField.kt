@@ -11,15 +11,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TextField(username: String, updateUsername: (username: String) -> Unit) {
+fun TextField(
+    username: String,
+    updateUsername: (username: String) -> Unit,
+) {
     OutlinedTextField(
         value = username,
-        onValueChange = { updateUsername.invoke(it) },
+        onValueChange = { username: String ->
+            updateUsername.invoke(username)
+        },
         modifier = Modifier
             .width(357.dp)
             .wrapContentHeight()
@@ -28,10 +32,4 @@ fun TextField(username: String, updateUsername: (username: String) -> Unit) {
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
         placeholder = { Text("example@example.com") }
     )
-}
-
-@Preview
-@Composable
-fun Previeww() {
-    TextField("", {})
 }
