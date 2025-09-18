@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -16,6 +17,7 @@ import com.mahshad.authentication.design.BlueBackground
 import com.mahshad.authentication.design.Button
 import com.mahshad.authentication.design.TextField
 import com.mahshad.authentication.design.WhiteBackground
+import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -27,6 +29,7 @@ fun LoginScreen(
     onNavigateToSignUp: () -> Unit
 ) {
     val uiStateValue by logInViewModel.uiState.collectAsStateWithLifecycle()
+    val coroutineScope = rememberCoroutineScope()
 
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -59,6 +62,14 @@ fun LoginScreen(
                 Button(
                     onClick = {
                         logInViewModel.onClick()
+                        if (logInViewModel.uiState.value.successful) {
+                            coroutineScope.launch {
+                                logInViewModel.loginUser()
+                            }
+
+                        } else {
+
+                        }
                     },
                     name = "Log In",
                     buttonColor = Color(0xFF00B1D0),
