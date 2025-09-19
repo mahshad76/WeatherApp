@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "WeatherApp"
 include(":app")
 include(":authentication")
+include(":dashboard")

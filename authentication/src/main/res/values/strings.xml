@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="username_limitations">
+        "Between 1 and 64 characters before @ "</string>
+    <string name="password_limitations">
+        "At least 8 character, upper and lowercase letters, and number"</string>
+</resources>

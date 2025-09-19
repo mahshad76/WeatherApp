@@ -9,11 +9,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.mahshad.authentication.R
 import com.mahshad.authentication.design.BlueBackground
 import com.mahshad.authentication.design.Button
+import com.mahshad.authentication.design.MatchPatternNote
 import com.mahshad.authentication.design.TextField
 import com.mahshad.authentication.design.WhiteBackground
 import kotlinx.serialization.Serializable
@@ -47,6 +51,9 @@ fun SignUpScreen(
                     keyboardType = KeyboardType.Email,
                     matchPatternError = uiStateValue.usernamePatternError
                 )
+                MatchPatternNote(
+                    stringResource(R.string.username_limitations)
+                )
                 TextField(
                     text = uiStateValue.password,
                     update = {
@@ -55,6 +62,9 @@ fun SignUpScreen(
                     placeholder = "••••••••",
                     keyboardType = KeyboardType.Password,
                     matchPatternError = uiStateValue.passwordPatternError
+                )
+                MatchPatternNote(
+                    stringResource(R.string.password_limitations)
                 )
                 Button(
                     onClick = {
@@ -74,4 +84,10 @@ fun SignUpScreen(
             }
         })
     }
+}
+
+@Preview
+@Composable
+fun previeww() {
+    SignUpScreen(onNavigateToLogIn = { a: String, b: String -> Unit })
 }

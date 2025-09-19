@@ -30,7 +30,7 @@ fun TextField(
         modifier = Modifier
             .width(357.dp)
             .wrapContentHeight()
-            .padding(bottom = 30.dp),
+            .padding(bottom = 10.dp),
         shape = RoundedCornerShape(18.dp),
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         placeholder = { Text(placeholder) },
