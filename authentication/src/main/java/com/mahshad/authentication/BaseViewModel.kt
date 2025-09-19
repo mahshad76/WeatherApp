@@ -13,7 +13,8 @@ open class BaseViewModel() : ViewModel() {
             activeButton = false,
             usernamePatternError = false,
             passwordPatternError = false,
-            successful = false
+            successful = false,
+            loginError = null
         )
     )
     val uiState: StateFlow<State> = _uiState
@@ -35,6 +36,18 @@ open class BaseViewModel() : ViewModel() {
                 passwordPatternError = false,
                 activeButton = !stateValue.username.isEmpty()
             )
+        }
+    }
+
+    fun updateLoginError(error: String) {
+        _uiState.update { stateValue ->
+            stateValue.copy(loginError = error)
+        }
+    }
+
+    fun onSnackBarDismissed() {
+        _uiState.update { stateValue ->
+            stateValue.copy(loginError = null)
         }
     }
 
@@ -71,5 +84,6 @@ data class State(
     val activeButton: Boolean,
     val usernamePatternError: Boolean,
     val passwordPatternError: Boolean,
-    val successful: Boolean
+    val successful: Boolean,
+    val loginError: String?
 )

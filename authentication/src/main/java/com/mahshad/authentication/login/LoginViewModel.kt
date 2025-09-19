@@ -16,8 +16,7 @@ class LoginViewModel @Inject constructor(private val auth: FirebaseAuth) : BaseV
             auth.signInWithEmailAndPassword(email, password).await()
             Log.d("TAG", "signInWithEmail:success")
         } catch (e: Exception) {
-            Log.w("TAG", "signInWithEmail:failure", e)
-            throw e
+            updateLoginError(e.message.toString())
         }
     }
 }
