@@ -1,10 +1,10 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    id("org.jetbrains.kotlin.plugin.compose") version "2.2.10"
-    id("org.jetbrains.kotlin.plugin.serialization")
     alias(libs.plugins.dagger.hilt.android)
     alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.plugin.compose)
+    alias(libs.plugins.serialization)
 }
 
 android {
@@ -55,6 +55,7 @@ dependencies {
 
     /// Composable
     implementation(libs.material3)
+    implementation(libs.ui.tooling.preview)
 
     ///Viewmodel
     implementation(libs.androidx.lifecycle.viewmodel.compose)
@@ -70,9 +71,7 @@ dependencies {
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.auth)
 
-    implementation(libs.ui.tooling.preview)
-
-    implementation(libs.androidx.material3.v121)
+    implementation(project(":systemdesign"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

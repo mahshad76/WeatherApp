@@ -15,11 +15,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mahshad.authentication.R
-import com.mahshad.authentication.design.BlueBackground
-import com.mahshad.authentication.design.Button
-import com.mahshad.authentication.design.MatchPatternNote
-import com.mahshad.authentication.design.TextField
-import com.mahshad.authentication.design.WhiteBackground
+import com.mahshad.systemdesign.BlueBackground
+import com.mahshad.systemdesign.Button
+import com.mahshad.systemdesign.MatchPatternNote
+import com.mahshad.systemdesign.TextField
+import com.mahshad.systemdesign.WhiteBackground
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -88,6 +88,6 @@ fun SignUpScreen(
 
 @Preview
 @Composable
-fun previeww() {
+fun Preview() {
     SignUpScreen(onNavigateToLogIn = { a: String, b: String -> Unit })
 }

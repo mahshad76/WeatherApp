@@ -1,4 +1,4 @@
-package com.mahshad.authentication.design
+package com.mahshad.systemdesign
 
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
