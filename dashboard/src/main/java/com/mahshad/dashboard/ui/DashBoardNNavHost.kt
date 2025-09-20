@@ -1,19 +1,24 @@
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import com.mahshad.authentication.R
+import com.mahshad.dashboard.ui.DashBoardViewModel
 import com.mahshad.systemdesign.BottomAppBar
 import com.mahshad.systemdesign.BottomNavigationItem
 
 @Composable
 fun DashBoardNavHost(
-    selectedItemIndex: Int,
-    onItemSelected: (Int) -> Unit
+    viewModel: DashBoardViewModel = hiltViewModel()
 ) {
+    val stateValue by viewModel.uiStateFlow.collectAsStateWithLifecycle()
+
     Scaffold(
         bottomBar = {
             BottomAppBar(
@@ -29,8 +34,10 @@ fun DashBoardNavHost(
                         ImageVector.vectorResource(id = R.drawable.calender_svgrepo_com)
                     )
                 ),
-                selectedItemIndex,
-                onItemSelected
+                stateValue,
+                { selectedItemIndex ->
+                    viewModel.updateSelectedItem(selectedItemIndex)
+                }
             )
         }
     ) { innerPadding ->

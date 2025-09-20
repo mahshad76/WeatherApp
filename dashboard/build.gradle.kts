@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.plugin.compose)
     alias(libs.plugins.serialization)
+    alias(libs.plugins.dagger.hilt.android)
 }
 
 android {
@@ -55,6 +56,11 @@ dependencies {
     /// Composable
     implementation(libs.material3)
     implementation(libs.ui.tooling.preview)
+
+    ///hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
 
     implementation(project(":systemdesign"))
 
