@@ -2,13 +2,37 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.navigation.compose.NavHost
+import com.mahshad.authentication.R
+import com.mahshad.systemdesign.BottomAppBar
+import com.mahshad.systemdesign.BottomNavigationItem
 
 @Composable
-fun DashBoardNavHost() {
+fun DashBoardNavHost(
+    selectedItemIndex: Int,
+    onItemSelected: (Int) -> Unit
+) {
     Scaffold(
-        topBar = {},
-        bottomBar = {}
+        bottomBar = {
+            BottomAppBar(
+                listOf(
+                    BottomNavigationItem(
+                        "Current weather",
+                        ImageVector.vectorResource(id = R.drawable.weather_svgrepo_filled),
+                        ImageVector.vectorResource(id = R.drawable.weather_svgrepo_com)
+                    ),
+                    BottomNavigationItem(
+                        "Weather forecast",
+                        ImageVector.vectorResource(id = R.drawable.calender_svgrepo_filled),
+                        ImageVector.vectorResource(id = R.drawable.calender_svgrepo_com)
+                    )
+                ),
+                selectedItemIndex,
+                onItemSelected
+            )
+        }
     ) { innerPadding ->
         NavHost(
             modifier = Modifier.padding(innerPadding),

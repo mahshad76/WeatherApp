@@ -56,6 +56,8 @@ dependencies {
     implementation(libs.material3)
     implementation(libs.ui.tooling.preview)
 
+    implementation(project(":systemdesign"))
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
