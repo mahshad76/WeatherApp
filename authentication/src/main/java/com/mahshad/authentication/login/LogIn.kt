@@ -35,7 +35,8 @@ data class LogInRoute(val username: String = "", val password: String = "")
 @Composable
 fun LoginScreen(
     logInViewModel: LoginViewModel = hiltViewModel(),
-    onNavigateToSignUp: () -> Unit
+    onNavigateToSignUp: () -> Unit,
+    onSuccessfulLogin: () -> Unit
 ) {
     val uiStateValue by logInViewModel.uiState.collectAsStateWithLifecycle()
     val coroutineScope = rememberCoroutineScope()

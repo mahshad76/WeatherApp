@@ -21,9 +21,6 @@ val NavController.onNavigateToLogIn: (username: String, password: String) -> Uni
 val NavController.onNavigateToSignUp: () -> Unit
     get() = { this.navigate(SignUpRoute) }
 
-val NavController.onSuccessLogIn: () -> Unit
-    get() = { }
-
 fun NavGraphBuilder.authNavGraph(
     onNavigateToSignUp: () -> Unit,
     onNavigateToLogIn: (String, String) -> Unit,
@@ -31,7 +28,10 @@ fun NavGraphBuilder.authNavGraph(
 ) {
     navigation<AuthRoute>(startDestination = LogInRoute::class) {
         composable<LogInRoute> {
-            LoginScreen(onNavigateToSignUp = onNavigateToSignUp)
+            LoginScreen(
+                onNavigateToSignUp = onNavigateToSignUp,
+                onSuccessfulLogin = onSuccessLogIn
+            )
         }
         composable<SignUpRoute> {
             SignUpScreen(onNavigateToLogIn = onNavigateToLogIn)

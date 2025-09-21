@@ -1,7 +1,7 @@
 package com.mahshad.dashboard.navigation
 
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.mahshad.dashboard.ui.currentweather.CurrentWeather
@@ -11,7 +11,10 @@ import kotlinx.serialization.Serializable
 @Serializable
 data object DashBoardRoute
 
-fun NavGraphBuilder.dashBoardGraph() {
+fun NavGraphBuilder.dashBoardGraph(
+    onNavigateToCurrentWeather: () -> Unit,
+    onNavigateToForecast: () -> Unit
+) {
     navigation<DashBoardRoute>(
         startDestination = CurrentWeather
     ) {
@@ -20,10 +23,6 @@ fun NavGraphBuilder.dashBoardGraph() {
     }
 }
 
-fun NavController.navigateFromCurrentToForecast() {
+fun NavHostController.navigateToForecast() = navigate(WeatherForecast)
 
-}
-
-fun NavController.navigateFromForecastToWeather() {
-
-}
+fun NavHostController.navigateToCurrentWeather() = navigate(CurrentWeather)

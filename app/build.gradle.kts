@@ -63,6 +63,7 @@ dependencies {
     kapt(libs.hilt.compiler)
 
     implementation(project(":authentication"))
+    implementation(project(":dashboard"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
