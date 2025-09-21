@@ -8,6 +8,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
 import com.mahshad.authentication.R
 import com.mahshad.dashboard.ui.DashBoardViewModel
 import com.mahshad.systemdesign.BottomAppBar
@@ -18,11 +19,12 @@ fun DashBoardNavHost(
     viewModel: DashBoardViewModel = hiltViewModel()
 ) {
     val stateValue by viewModel.uiStateFlow.collectAsStateWithLifecycle()
+    val navController = rememberNavController()
 
     Scaffold(
         bottomBar = {
             BottomAppBar(
-                listOf(
+                bottomNavigationItems = listOf(
                     BottomNavigationItem(
                         "Current weather",
                         ImageVector.vectorResource(id = R.drawable.weather_svgrepo_filled),
@@ -34,10 +36,11 @@ fun DashBoardNavHost(
                         ImageVector.vectorResource(id = R.drawable.calender_svgrepo_com)
                     )
                 ),
-                stateValue,
-                { selectedItemIndex ->
+                selectedItemIndex = stateValue,
+                onItemSelected = { selectedItemIndex ->
                     viewModel.updateSelectedItem(selectedItemIndex)
-                }
+                },
+                navController = navController
             )
         }
     ) { innerPadding ->

@@ -6,12 +6,14 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.navigation.NavHostController
 
 @Composable
 fun BottomAppBar(
     bottomNavigationItems: List<BottomNavigationItem>,
     selectedItemIndex: Int,
-    onItemSelected: (Int) -> Unit
+    onItemSelected: (Int) -> Unit,
+    navController: NavHostController
 ) {
     BottomAppBar {
         bottomNavigationItems.forEachIndexed { index, item ->
