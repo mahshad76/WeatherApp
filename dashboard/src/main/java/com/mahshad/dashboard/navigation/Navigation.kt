@@ -18,8 +18,12 @@ fun NavGraphBuilder.dashBoardGraph(
     navigation<DashBoardRoute>(
         startDestination = CurrentWeather
     ) {
-        composable<CurrentWeather> { }
-        composable<WeatherForecast> { }
+        composable<CurrentWeather> {
+            CurrentWeather(onNavigateToForecast)
+        }
+        composable<WeatherForecast> {
+            WeatherForecast(onNavigateToCurrentWeather)
+        }
     }
 }
 

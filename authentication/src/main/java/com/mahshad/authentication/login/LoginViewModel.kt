@@ -5,6 +5,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.mahshad.authentication.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.tasks.await
 
 @HiltViewModel
@@ -17,6 +18,18 @@ class LoginViewModel @Inject constructor(private val auth: FirebaseAuth) : BaseV
             Log.d("TAG", "signInWithEmail:success")
         } catch (e: Exception) {
             updateLoginError(e.message.toString())
+        }
+    }
+
+    fun updateLoginError(error: String) {
+        _uiState.update { stateValue ->
+            stateValue.copy(loginError = error)
+        }
+    }
+
+    fun onSnackBarDismissed() {
+        _uiState.update { stateValue ->
+            stateValue.copy(loginError = null)
         }
     }
 }

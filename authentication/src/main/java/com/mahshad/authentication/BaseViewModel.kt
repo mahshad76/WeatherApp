@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 
 open class BaseViewModel() : ViewModel() {
-    private val _uiState = MutableStateFlow<State>(
+    protected val _uiState = MutableStateFlow<State>(
         State(
             username = "",
             password = "",
@@ -36,18 +36,6 @@ open class BaseViewModel() : ViewModel() {
                 passwordPatternError = false,
                 activeButton = !stateValue.username.isEmpty()
             )
-        }
-    }
-
-    fun updateLoginError(error: String) {
-        _uiState.update { stateValue ->
-            stateValue.copy(loginError = error)
-        }
-    }
-
-    fun onSnackBarDismissed() {
-        _uiState.update { stateValue ->
-            stateValue.copy(loginError = null)
         }
     }
 
