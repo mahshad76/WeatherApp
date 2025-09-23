@@ -1,10 +1,16 @@
 package com.mahshad.authentication
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
+@OptIn(FlowPreview::class)
 open class BaseViewModel() : ViewModel() {
     protected val _uiState = MutableStateFlow<State>(
         State(
@@ -14,10 +20,14 @@ open class BaseViewModel() : ViewModel() {
             usernamePatternError = false,
             passwordPatternError = false,
             successful = false,
-            loginError = null
+            loginError = null,
+            loginSuccess = null
         )
     )
     val uiState: StateFlow<State> = _uiState
+    private val _clickEvent: MutableSharedFlow<Unit> = MutableSharedFlow()
+    val clickEvent: SharedFlow<Unit> = _clickEvent
+
 
     fun updateUsernameState(username: String) {
         _uiState.update { stateValue ->
@@ -36,6 +46,12 @@ open class BaseViewModel() : ViewModel() {
                 passwordPatternError = false,
                 activeButton = !stateValue.username.isEmpty()
             )
+        }
+    }
+
+    fun updateClickEvent() {
+        viewModelScope.launch {
+            _clickEvent.emit(Unit)
         }
     }
 
@@ -73,5 +89,6 @@ data class State(
     val usernamePatternError: Boolean,
     val passwordPatternError: Boolean,
     val successful: Boolean,
-    val loginError: String?
+    val loginError: String?,
+    val loginSuccess: Boolean?
 )

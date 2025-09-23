@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -26,7 +27,6 @@ import com.mahshad.systemdesign.Button
 import com.mahshad.systemdesign.MatchPatternNote
 import com.mahshad.systemdesign.TextField
 import com.mahshad.systemdesign.WhiteBackground
-import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -85,15 +85,7 @@ fun LoginScreen(
                     )
                     Button(
                         onClick = {
-                            logInViewModel.onClick()
-                            if (logInViewModel.uiState.value.successful) {
-                                coroutineScope.launch {
-                                    logInViewModel.loginUser()
-                                }
-
-                            } else {
-
-                            }
+                            logInViewModel.updateClickEvent()
                         },
                         name = "Log In",
                         buttonColor = Color(0xFF00B1D0),
@@ -110,16 +102,27 @@ fun LoginScreen(
                         enabled = true
                     )
 
-                    LaunchedEffect(uiStateValue.loginError) {
+                    LaunchedEffect(
+                        key1 = uiStateValue.loginError,
+                        key2 = uiStateValue.loginSuccess
+                    ) {
                         val errorMessage = uiStateValue.loginError
+                        val loginSuccess = uiStateValue.loginSuccess
+
                         if (errorMessage != null) {
-                            coroutineScope.launch {
-                                val result = snackBarHostState.showSnackbar(
-                                    message = errorMessage,
-                                    actionLabel = "Dismiss"
-                                )
+
+                            val result = snackBarHostState.showSnackbar(
+                                message = errorMessage,
+                                actionLabel = "Dismiss"
+                            )
+                            if (result == SnackbarResult.Dismissed ||
+                                result == SnackbarResult.ActionPerformed
+                            ) {
+                                logInViewModel.onSnackBarDismissed()
                             }
-                            logInViewModel.onSnackBarDismissed()
+                        }
+                        if (loginSuccess == true) {
+                            onSuccessfulLogin.invoke()
                         }
                     }
                 }

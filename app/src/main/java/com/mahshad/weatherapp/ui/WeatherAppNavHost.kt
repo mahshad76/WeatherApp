@@ -23,7 +23,7 @@ fun WeatherAppNavHost(navController: NavHostController) {
         authNavGraph(
             navController.onNavigateToSignUp,
             onNavigateToLogIn = navController.onNavigateToLogIn,
-            onSuccessLogIn = { navController.navigate(TopLevelDestinations.DASHBOARD) },
+            onSuccessLogIn = { navController.navigate(TopLevelDestinations.DASHBOARD.baseRoute) },
         )
         dashBoardGraph(
             { navController.navigateToCurrentWeather() },

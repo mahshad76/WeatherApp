@@ -3,8 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.plugin.compose)
-    alias(libs.plugins.serialization)
     alias(libs.plugins.dagger.hilt.android)
+    alias(libs.plugins.serialization)
 }
 
 android {

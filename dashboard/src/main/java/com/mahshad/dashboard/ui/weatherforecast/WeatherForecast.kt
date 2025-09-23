@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import kotlinx.serialization.Serializable
 
 @Serializable
-object WeatherForecast
+data object WeatherForecast
 
 @Composable
 fun WeatherForecast(
