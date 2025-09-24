@@ -11,8 +11,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.mahshad.authentication.R
-import com.mahshad.dashboard.common.navigateToCurrentWeather
-import com.mahshad.dashboard.common.navigateToForecast
 import com.mahshad.dashboard.ui.DashBoardViewModel
 import com.mahshad.dashboard.ui.currentweather.CurrentWeather
 import com.mahshad.dashboard.ui.weatherforecast.WeatherForecast
@@ -35,11 +33,13 @@ fun DashBoardNavHost(
             BottomAppBar(
                 bottomNavigationItems = listOf(
                     BottomNavigationItem(
+                        CurrentWeather,
                         "Current weather",
                         ImageVector.vectorResource(id = R.drawable.weather_svgrepo_filled),
                         ImageVector.vectorResource(id = R.drawable.weather_svgrepo_com)
                     ),
                     BottomNavigationItem(
+                        WeatherForecast,
                         "Weather forecast",
                         ImageVector.vectorResource(id = R.drawable.calender_svgrepo_filled),
                         ImageVector.vectorResource(id = R.drawable.calender_svgrepo_com)
@@ -59,10 +59,10 @@ fun DashBoardNavHost(
             startDestination = CurrentWeather::class
         ) {
             composable<CurrentWeather> {
-                CurrentWeather({ navController.navigateToForecast() })
+                CurrentWeather()
             }
             composable<WeatherForecast> {
-                WeatherForecast({ navController.navigateToCurrentWeather() })
+                WeatherForecast()
             }
         }
     }

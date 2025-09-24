@@ -8,8 +8,6 @@ import kotlinx.serialization.Serializable
 data object CurrentWeather
 
 @Composable
-fun CurrentWeather(
-    onNavigateToForecast: () -> Unit
-) {
+fun CurrentWeather() {
     Text("current weather")
 }

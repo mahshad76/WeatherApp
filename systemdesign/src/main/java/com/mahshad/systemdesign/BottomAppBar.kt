@@ -19,7 +19,16 @@ fun BottomAppBar(
         bottomNavigationItems.forEachIndexed { index, item ->
             NavigationBarItem(
                 selected = selectedItemIndex == index,
-                onClick = { onItemSelected(index) },
+                onClick = {
+                    onItemSelected(index)
+                    navController.navigate(item.route) {
+                        navController.graph.startDestinationRoute?.let { route ->
+                            popUpTo(route) { saveState = true }
+                        }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                },
                 icon = {
                     Icon(
                         imageVector = if (index == selectedItemIndex) {
@@ -37,6 +46,7 @@ fun BottomAppBar(
 }
 
 data class BottomNavigationItem(
+    val route: Any,
     val title: String,
     val selectedIcon: ImageVector,
     val unselectedIcon: ImageVector,
