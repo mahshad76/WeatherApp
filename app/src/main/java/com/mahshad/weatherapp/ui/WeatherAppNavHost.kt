@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import com.mahshad.authentication.navigation.authNavGraph
 import com.mahshad.authentication.navigation.onNavigateToLogIn
 import com.mahshad.authentication.navigation.onNavigateToSignUp
+import com.mahshad.dashboard.navigation.DashBoardRoute
 import com.mahshad.dashboard.navigation.dashBoardGraph
 import com.mahshad.dashboard.navigation.navigateToCurrentWeather
 import com.mahshad.dashboard.navigation.navigateToForecast
@@ -23,7 +24,7 @@ fun WeatherAppNavHost(navController: NavHostController) {
         authNavGraph(
             navController.onNavigateToSignUp,
             onNavigateToLogIn = navController.onNavigateToLogIn,
-            onSuccessLogIn = { navController.navigate(TopLevelDestinations.DASHBOARD.baseRoute) },
+            onSuccessLogIn = { navController.navigate(DashBoardRoute) },
         )
         dashBoardGraph(
             { navController.navigateToCurrentWeather() },

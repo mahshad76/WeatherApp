@@ -16,7 +16,7 @@ fun NavGraphBuilder.dashBoardGraph(
     onNavigateToForecast: () -> Unit
 ) {
     navigation<DashBoardRoute>(
-        startDestination = CurrentWeather
+        startDestination = CurrentWeather::class
     ) {
         composable<CurrentWeather> {
             CurrentWeather(onNavigateToForecast)
