@@ -8,11 +8,20 @@ import androidx.compose.ui.res.vectorResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.mahshad.authentication.R
+import com.mahshad.dashboard.common.navigateToCurrentWeather
+import com.mahshad.dashboard.common.navigateToForecast
 import com.mahshad.dashboard.ui.DashBoardViewModel
+import com.mahshad.dashboard.ui.currentweather.CurrentWeather
+import com.mahshad.dashboard.ui.weatherforecast.WeatherForecast
 import com.mahshad.systemdesign.BottomAppBar
 import com.mahshad.systemdesign.BottomNavigationItem
+import kotlinx.serialization.Serializable
+
+@Serializable
+data object DashBoardRoute
 
 @Composable
 fun DashBoardNavHost(
@@ -46,17 +55,16 @@ fun DashBoardNavHost(
     ) { innerPadding ->
         NavHost(
             modifier = Modifier.padding(innerPadding),
-            navController = TODO(),
-            startDestination = TODO(),
-            contentAlignment = TODO(),
-            route = TODO(),
-            typeMap = TODO(),
-            enterTransition = TODO(),
-            exitTransition = TODO(),
-            popEnterTransition = TODO(),
-            popExitTransition = TODO(),
-            sizeTransform = TODO()
-        ) { }
+            navController = navController,
+            startDestination = CurrentWeather::class
+        ) {
+            composable<CurrentWeather> {
+                CurrentWeather({ navController.navigateToForecast() })
+            }
+            composable<WeatherForecast> {
+                WeatherForecast({ navController.navigateToCurrentWeather() })
+            }
+        }
     }
 }
 

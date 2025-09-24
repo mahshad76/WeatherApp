@@ -1,17 +1,16 @@
 package com.mahshad.weatherapp.ui
 
+import DashBoardNavHost
+import DashBoardRoute
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import com.mahshad.authentication.common.onNavigateToLogIn
+import com.mahshad.authentication.common.onNavigateToSignUp
 import com.mahshad.authentication.navigation.authNavGraph
-import com.mahshad.authentication.navigation.onNavigateToLogIn
-import com.mahshad.authentication.navigation.onNavigateToSignUp
-import com.mahshad.dashboard.navigation.DashBoardRoute
-import com.mahshad.dashboard.navigation.dashBoardGraph
-import com.mahshad.dashboard.navigation.navigateToCurrentWeather
-import com.mahshad.dashboard.navigation.navigateToForecast
 import com.mahshad.weatherapp.navigation.TopLevelDestinations
 
 @Composable
@@ -26,9 +25,8 @@ fun WeatherAppNavHost(navController: NavHostController) {
             onNavigateToLogIn = navController.onNavigateToLogIn,
             onSuccessLogIn = { navController.navigate(DashBoardRoute) },
         )
-        dashBoardGraph(
-            { navController.navigateToCurrentWeather() },
-            onNavigateToForecast = { navController.navigateToForecast() },
-        )
+        composable<DashBoardRoute> {
+            DashBoardNavHost()
+        }
     }
 }

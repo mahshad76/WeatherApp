@@ -1,6 +1,5 @@
 package com.mahshad.authentication.navigation
 
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
@@ -12,14 +11,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data object AuthRoute
-
-val NavController.onNavigateToLogIn: (username: String, password: String) -> Unit
-    get() = { username, password ->
-        this.navigate(LogInRoute(username, password))
-    }
-
-val NavController.onNavigateToSignUp: () -> Unit
-    get() = { this.navigate(SignUpRoute) }
 
 fun NavGraphBuilder.authNavGraph(
     onNavigateToSignUp: () -> Unit,
