@@ -4,8 +4,8 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ConditionDTO(
-    @SerialName("code") val code: Int? = null,
-    @SerialName("icon") val icon: String? = null,
-    @SerialName("text") val text: String? = null
+data class Condition(
+    @SerialName("text") var text: String? = null,
+    @SerialName("icon") var icon: String? = null,
+    @SerialName("code") var code: Int? = null
 )

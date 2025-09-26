@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.mahshad.authentication.common.onNavigateToLogIn
 import com.mahshad.authentication.common.onNavigateToSignUp
+import com.mahshad.authentication.navigation.AuthRoute
 import com.mahshad.authentication.navigation.authNavGraph
 import com.mahshad.weatherapp.navigation.TopLevelDestinations
 
@@ -23,7 +24,11 @@ fun WeatherAppNavHost(navController: NavHostController) {
         authNavGraph(
             navController.onNavigateToSignUp,
             onNavigateToLogIn = navController.onNavigateToLogIn,
-            onSuccessLogIn = { navController.navigate(DashBoardRoute) },
+            onSuccessLogIn = {
+                navController.navigate(DashBoardRoute) {
+                    popUpTo(AuthRoute) { inclusive = true }
+                }
+            },
         )
         composable<DashBoardRoute> {
             DashBoardNavHost()

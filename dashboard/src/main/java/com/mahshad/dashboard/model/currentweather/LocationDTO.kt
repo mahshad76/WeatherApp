@@ -4,13 +4,13 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class LocationDTO(
-    @SerialName("country") val country: String? = null,
-    @SerialName("lat") val lat: Double? = null,
-    @SerialName("localtime") val localtime: String? = null,
-    @SerialName("localtime_epoch") val localtimeEpoch: Int? = null,
-    @SerialName("lon") val lon: Double? = null,
-    @SerialName("name") val name: String? = null,
-    @SerialName("region") val region: String? = null,
-    @SerialName("tz_id") val tzId: String? = null
+data class Location(
+    @SerialName("name") var name: String? = null,
+    @SerialName("region") var region: String? = null,
+    @SerialName("country") var country: String? = null,
+    @SerialName("lat") var lat: Double? = null,
+    @SerialName("lon") var lon: Double? = null,
+    @SerialName("tz_id") var tzId: String? = null,
+    @SerialName("localtime_epoch") var localtimeEpoch: Int? = null,
+    @SerialName("localtime") var localtime: String? = null
 )

@@ -1,3 +1,4 @@
+//import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -13,6 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import com.mahshad.authentication.R
 import com.mahshad.dashboard.ui.DashBoardViewModel
 import com.mahshad.dashboard.ui.currentweather.CurrentWeather
+import com.mahshad.dashboard.ui.currentweather.CurrentWeatherViewmodel
 import com.mahshad.dashboard.ui.weatherforecast.WeatherForecast
 import com.mahshad.systemdesign.BottomAppBar
 import com.mahshad.systemdesign.BottomNavigationItem
@@ -59,7 +61,8 @@ fun DashBoardNavHost(
             startDestination = CurrentWeather::class
         ) {
             composable<CurrentWeather> {
-                CurrentWeather()
+                val viewModel: CurrentWeatherViewmodel = hiltViewModel()
+                CurrentWeather(viewModel)
             }
             composable<WeatherForecast> {
                 WeatherForecast()

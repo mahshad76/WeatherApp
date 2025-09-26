@@ -49,18 +49,23 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.runtime)
 
-    /// Navigation
+    // Navigation
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
 
-    /// Composable
+    // Composable
     implementation(libs.material3)
     implementation(libs.ui.tooling.preview)
 
-    ///hilt
+    // hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
+
+    // firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.config)
+    implementation(libs.firebase.analytics)
 
     implementation(project(":systemdesign"))
 

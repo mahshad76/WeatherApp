@@ -8,6 +8,6 @@ import kotlinx.serialization.Serializable
 data object CurrentWeather
 
 @Composable
-fun CurrentWeather() {
+fun CurrentWeather(viewmodel: CurrentWeatherViewmodel) {
     Text("current weather")
 }
