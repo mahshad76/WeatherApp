@@ -1,6 +1,8 @@
 package com.mahshad.authentication.di
 
 import com.google.firebase.Firebase
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.analytics
 import com.google.firebase.auth.auth
 import dagger.Module
 import dagger.Provides
@@ -15,4 +17,8 @@ object AuthenticationModule {
     @Provides
     @Singleton
     fun provideFirebaseAuth() = Firebase.auth
+
+    @Provides
+    @Singleton
+    fun provideFirebaseAnalytics(): FirebaseAnalytics = Firebase.analytics
 }
