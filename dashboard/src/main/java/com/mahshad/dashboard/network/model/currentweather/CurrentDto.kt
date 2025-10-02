@@ -1,17 +1,19 @@
 package com.mahshad.network.models.currentweather
 
-import com.mahshad.network.models.Condition
+import com.mahshad.dashboard.repository.model.Current
+import com.mahshad.network.models.ConditionDto
+import com.mahshad.network.models.toCondition
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Current(
+data class CurrentDto(
     @SerialName("last_updated_epoch") var lastUpdatedEpoch: Int? = null,
     @SerialName("last_updated") var lastUpdated: String? = null,
     @SerialName("temp_c") var tempC: Double? = null,
     @SerialName("temp_f") var tempF: Double? = null,
     @SerialName("is_day") var isDay: Int? = null,
-    @SerialName("condition") var condition: Condition? = Condition(),
+    @SerialName("condition") var conditionDto: ConditionDto? = ConditionDto(),
     @SerialName("wind_mph") var windMph: Double? = null,
     @SerialName("wind_kph") var windKph: Double? = null,
     @SerialName("wind_degree") var windDegree: Int? = null,
@@ -40,3 +42,45 @@ data class Current(
     @SerialName("dni") var dni: Double? = null,
     @SerialName("gti") var gti: Double? = null
 )
+
+fun CurrentDto.toCurrent(): Result<Current> =
+    runCatching {
+        val requiredConditionDTO = conditionDto?.toCondition()
+            ?: throw IllegalArgumentException("Condition data is mandatory for Current and cannot be null.")
+        Current(
+            cloud = cloud ?: 0,
+            humidity = humidity ?: 0,
+            isDay = isDay ?: 0,
+            precipIn = precipIn ?: 0.0,
+            precipMm = precipMm ?: 0.0,
+            pressureIn = pressureIn ?: 0.0,
+            pressureMb = pressureMb ?: 0.0,
+            uv = uv ?: 0.0,
+            windDegree = windDegree ?: 0,
+            windDir = windDir.orEmpty(),
+            windKph = windKph ?: 0.0,
+            windMph = windMph ?: 0.0,
+            windchillC = windchillC ?: 0.0,
+            windchillF = windchillF ?: 0.0,
+            lastUpdatedEpoch = lastUpdatedEpoch ?: 0,
+            lastUpdated = lastUpdated ?: "",
+            tempC = tempC ?: 0.0,
+            tempF = tempF ?: 0.0,
+            condition = requiredConditionDTO,
+            feelslikeC = feelslikeC ?: 0.0,
+            feelslikeF = feelslikeF ?: 0.0,
+            heatindexC = heatindexC ?: 0.0,
+            heatindexF = heatindexF ?: 0.0,
+            dewpointC = dewpointC ?: 0.0,
+            dewpointF = dewpointF ?: 0.0,
+            visKm = visKm ?: 0.0,
+            visMiles = visKm ?: 0.0,
+            gustMph = gustMph ?: 0.0,
+            gustKph = gustKph ?: 0.0,
+            shortRad = shortRad ?: 0.0,
+            diffRad = diffRad ?: 0.0,
+            dni = dni ?: 0.0,
+            gti = gti ?: 0.0,
+        )
+    }
+

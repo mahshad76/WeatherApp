@@ -12,6 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.mahshad.authentication.R
+import com.mahshad.dashboard.navigation.DashboardRoutes
 import com.mahshad.dashboard.ui.DashBoardViewModel
 import com.mahshad.dashboard.ui.currentweather.CurrentWeather
 import com.mahshad.dashboard.ui.currentweather.CurrentWeatherViewmodel
@@ -35,13 +36,13 @@ fun DashBoardNavHost(
             BottomAppBar(
                 bottomNavigationItems = listOf(
                     BottomNavigationItem(
-                        CurrentWeather,
+                        DashboardRoutes.CurrentWeather,
                         "Current weather",
                         ImageVector.vectorResource(id = R.drawable.weather_svgrepo_filled),
                         ImageVector.vectorResource(id = R.drawable.weather_svgrepo_com)
                     ),
                     BottomNavigationItem(
-                        WeatherForecast,
+                        DashboardRoutes.WeatherForecast,
                         "Weather forecast",
                         ImageVector.vectorResource(id = R.drawable.calender_svgrepo_filled),
                         ImageVector.vectorResource(id = R.drawable.calender_svgrepo_com)
@@ -58,13 +59,13 @@ fun DashBoardNavHost(
         NavHost(
             modifier = Modifier.padding(innerPadding),
             navController = navController,
-            startDestination = CurrentWeather::class
+            startDestination = DashboardRoutes.CurrentWeather
         ) {
-            composable<CurrentWeather> {
+            composable<DashboardRoutes.CurrentWeather> {
                 val viewModel: CurrentWeatherViewmodel = hiltViewModel()
                 CurrentWeather(viewModel)
             }
-            composable<WeatherForecast> {
+            composable<DashboardRoutes.WeatherForecast> {
                 WeatherForecast()
             }
         }
